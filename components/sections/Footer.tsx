@@ -48,7 +48,6 @@ export function Footer() {
         
         <div className="pt-8 border-t border-gray-800 text-sm text-center flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {currentYear} Krisna Laundry. Hak Cipta Dilindungi.</p>
-          <p>Dibuat dengan ❤️</p>
         </div>
       </div>
     </footer>

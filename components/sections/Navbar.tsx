@@ -48,12 +48,9 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#beranda" onClick={(e) => handleScrollTo(e, '#beranda')} className="flex items-center gap-2">
-            <img 
-              src="/Logo Krisna Laundry.png" 
-              alt="Krisna Laundry Logo" 
-              className="h-10 md:h-12 w-auto object-contain"
-            />
+          <a href="#beranda" onClick={(e) => handleScrollTo(e, '#beranda')} className="flex items-center gap-1.5 font-bold text-xl md:text-2xl tracking-tight">
+            <span className="text-primary-500">Krisna</span>
+            <span className="text-slate-800">Laundry</span>
           </a>
 
           {/* Desktop Nav */}

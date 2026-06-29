@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .clip-triangle-top-right {
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
