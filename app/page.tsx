@@ -55,6 +55,7 @@ export default async function Home() {
     name: s.name,
     description: s.description,
     duration: s.duration_estimate,
+    imageUrl: s.image_url || undefined,
   }));
 
   // Format pricing items
