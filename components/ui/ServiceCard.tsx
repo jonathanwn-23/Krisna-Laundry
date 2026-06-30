@@ -1,62 +1,44 @@
 'use client';
 
 import React from 'react';
-import { generateWAUrl, ServiceOrder } from '@/lib/wa-template';
-import { WhatsAppButton } from './WhatsAppButton';
 
 export interface ServiceCardProps {
   id: string;
   name: string;
   description: string;
   duration: string;
-  waNumber: string;
+  imageUrl?: string;
 }
 
-export function ServiceCard({ name, description, duration, waNumber }: ServiceCardProps) {
-  const handleOrder = () => {
-    // Kita arahkan pengguna untuk bertanya via WA terkait layanan ini
-    const order: ServiceOrder = {
-      serviceName: name,
-      pricingType: 'kiloan', // Default placeholder jika cuma nanya layanan
-      price: 0,
-      unit: 'tanya admin',
-      duration: duration
-    };
-    
-    // Namun untuk layanan general, kita bisa buat URL khusus atau pakai WAUrl standar
-    const text = `Halo, saya ingin bertanya tentang layanan *${name}*.\n\nEstimasi: ${duration}\nMohon info lebih lanjut. Terima kasih!`;
-    const formattedNumber = waNumber.replace(/^0/, '62').replace(/^\+/, '');
-    const url = `https://wa.me/${formattedNumber}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
-  };
-
+export function ServiceCard({ name, description, duration, imageUrl }: ServiceCardProps) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-      <div className="w-14 h-14 bg-primary-50 text-primary-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" x2="12" y1="15" y2="3" />
-        </svg>
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full w-full min-w-[280px] md:min-w-[320px] snap-center">
+      {imageUrl ? (
+        <div className="w-full h-48 bg-gray-100 rounded-xl mb-6 overflow-hidden flex-shrink-0">
+          <img src={imageUrl} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+      ) : (
+        <div className="w-full h-48 bg-gray-50 rounded-xl mb-6 flex flex-col items-center justify-center text-gray-300 flex-shrink-0 border border-gray-100 border-dashed">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mb-2">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+            <circle cx="9" cy="9" r="2"/>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+          </svg>
+          <span className="text-xs">Gambar menyusul</span>
+        </div>
+      )}
+      <div className="flex-grow">
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
+        <p className="text-gray-600 mb-4">{description}</p>
       </div>
       
-      <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
-      <p className="text-gray-600 mb-4 h-12 overflow-hidden">{description}</p>
-      
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-6 bg-gray-50 w-fit px-3 py-1.5 rounded-lg">
+      <div className="flex items-center gap-2 text-sm text-gray-500 bg-gray-50 w-fit px-3 py-1.5 rounded-lg mt-auto">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <polyline points="12 6 12 12 16 14"/>
         </svg>
         {duration}
       </div>
-      
-      <WhatsAppButton 
-        label="Tanya via WA" 
-        onClick={handleOrder} 
-        variant="outline"
-        className="w-full"
-      />
     </div>
   );
 }
