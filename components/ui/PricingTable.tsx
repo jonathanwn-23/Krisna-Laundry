@@ -54,6 +54,7 @@ export function PricingTable({ items, waNumber }: PricingTableProps) {
   };
 
   const formatPrice = (price: number) => {
+    if (price === 0) return 'Tergantung Ukuran';
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
@@ -111,7 +112,9 @@ export function PricingTable({ items, waNumber }: PricingTableProps) {
                     </td>
                     <td className="p-4 font-medium text-primary-600">
                       {formatPrice(item.price)}
-                      <span className="text-sm text-gray-500 font-normal"> / {item.unit}</span>
+                      {item.price > 0 && (
+                        <span className="text-sm text-gray-500 font-normal"> / {item.unit}</span>
+                      )}
                     </td>
                     <td className="p-4 text-sm text-gray-600">
                       {item.duration_estimate}
