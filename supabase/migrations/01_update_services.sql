@@ -8,6 +8,6 @@ VALUES
 ('Cuci Handuk', 'Cuci Kering', '1-2 Hari', true, 3),
 ('Cuci Selimut', 'Selimut K dan Selimut B', '2-3 Hari', true, 4),
 ('Cuci Bed Cover', 'Cuci Kering', '3-4 Hari', true, 5),
-('Cuci Rumbai', 'Cuci Kering', '1-2 Hari', true, 6),
+('Cuci Bed Cover Rumbai', 'Cuci Kering', '3-4 Hari', true, 6),
 ('Cuci Sepatu', 'Cuci Kering', '1-2 Hari', true, 7),
 ('Cuci Boneka', 'Boneka tergantung ukuran', '2-3 Hari', true, 8);
