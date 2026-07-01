@@ -6,5 +6,4 @@ UPDATE public.services SET image_url = '/gambar-selimut.png' WHERE name = 'Cuci 
 UPDATE public.services SET image_url = '/gambar-bedcover.png' WHERE name = 'Cuci Bed Cover';
 UPDATE public.services SET image_url = '/gambar-sepatu.png' WHERE name = 'Cuci Sepatu';
 UPDATE public.services SET image_url = '/gambar-beruang.png' WHERE name = 'Cuci Boneka';
-
--- (Catatan: Cuci Rumbai tetap menggunakan placeholder karena tidak ada fotonya)
+UPDATE public.services SET image_url = '/gambar-bedcoverrumbai.png' WHERE name = 'Cuci Bed Cover Rumbai';
