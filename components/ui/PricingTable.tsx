@@ -67,7 +67,7 @@ export function PricingTable({ items, waNumber }: PricingTableProps) {
       {/* Tabs */}
       <div className="flex justify-center mb-10">
         <div className="bg-gray-100 p-1 rounded-xl inline-flex space-x-1 shadow-inner">
-          {(['kiloan', 'paketan', 'satuan'] as const).map((tab) => (
+          {(['kiloan', 'satuan', 'paketan'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -94,11 +94,14 @@ export function PricingTable({ items, waNumber }: PricingTableProps) {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-100 text-sm text-gray-600">
-                  <th className="p-4 font-semibold">Layanan / Paket</th>
-                  <th className="p-4 font-semibold">Harga</th>
-                  <th className="p-4 font-semibold">Estimasi</th>
-                  <th className="p-4 font-semibold">Keterangan</th>
-                  <th className="p-4 font-semibold text-right">Pesan</th>
+                  <th className="p-4 font-semibold w-[20%]">Layanan / Paket</th>
+                  <th className="p-4 font-semibold w-[20%]">Harga</th>
+                  <th className="p-4 font-semibold w-[15%]">Estimasi</th>
+                  <th className={`p-4 font-semibold ${activeTab === 'kiloan' ? 'w-[35%]' : 'w-[25%]'}`}>Keterangan</th>
+                  {activeTab !== 'kiloan' && (
+                    <th className="p-4 font-semibold text-center w-[10%]">Jumlah</th>
+                  )}
+                  <th className="p-4 font-semibold text-right w-[10%]">Pesan</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -122,24 +125,26 @@ export function PricingTable({ items, waNumber }: PricingTableProps) {
                     <td className="p-4 text-sm text-gray-500">
                       {item.note || '-'}
                     </td>
+                    {activeTab !== 'kiloan' && (
+                      <td className="p-4 text-center">
+                          {item.allow_quantity && (
+                            <input
+                              type="number"
+                              min="1"
+                              placeholder="Jml"
+                              className="w-16 px-2 py-2 text-center text-sm font-bold text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+                              value={quantities[item.id] || ''}
+                              onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                            />
+                          )}
+                      </td>
+                    )}
                     <td className="p-4 text-right">
-                      <div className="flex items-center justify-end gap-3">
-                        {item.allow_quantity && (
-                          <input
-                            type="number"
-                            min="1"
-                            placeholder="Jml"
-                            className="w-16 px-2 py-2 text-center text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
-                            value={quantities[item.id] || ''}
-                            onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                          />
-                        )}
                         <WhatsAppButton
                           label="Pesan"
                           onClick={() => handleOrder(item)}
-                          className="!px-4 !py-2 text-sm"
+                          className="!px-4 !py-2 text-sm w-full"
                         />
-                      </div>
                     </td>
                   </tr>
                 ))}
